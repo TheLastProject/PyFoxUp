@@ -177,6 +177,7 @@ def convert_line(line, commandmode, undolist):
                 try:
                     int(char)
                 except ValueError:
+                    undolist.append("")
                     print("Unknown command: %s" % char)
         try:
             furtherhtml, commandmode, undolist = convert_line(line[charnumber:], False, undolist)

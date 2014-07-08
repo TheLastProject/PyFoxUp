@@ -50,7 +50,7 @@ To switch to <em>Markup Mode</em>, simply type an <em>*</em> character in your d
 <span style='font-size:20px'>Commands</span>
 <br />
 
-<em>Note: lowercase characters affect a region until they&apos;re reverted. Uppercase characters do not need to be closed, as they do not affect a region.</em>
+<em>Note: lowercase characters affect a region until they&apos;re reverted. Other characters do not need to be closed, as they do not affect a region.</em>
 <br />
 </p>
 <p>
@@ -74,6 +74,9 @@ i         </td><td> Italic      </td><td> Applies italic style  </td><td> No
 </tr>
 <tr><td>
 R         </td><td> Revert      </td><td> Reverts style(s)      </td><td> Optional - Revert all by default. If given, revert last X styles
+</tr>
+<tr><td>
+|         </td><td> Table       </td><td> Add table column      </td><td> No
 </tr>
 </table>
 To parse a document, simply enter the directory <b>FoxUp</b> is in and run <em>python foxup.py &lt;filename&gt;</em>. <b>FoxUp</b> will return the parsed document in the directory the original document was in.

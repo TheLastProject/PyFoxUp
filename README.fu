@@ -15,7 +15,7 @@ By default, *b.FoxUp*R. runs in *i.Input Mode*R.. In this mode, every character 
 To switch to *i.Markup Mode*R., simply type an *i.***R. character in your document when in *i.Input Mode*R.. In *i.Markup Mode*R., every key is interpreted as a command, making it easy to manage styles. For example, b activates *b.bold*R., i puts text into *i.italics*R. and bi applies *bi.both*R.. To switch back to *i.Input Mode*R., simply press *i..*R. (dot).
 
 *s20.Commands*R.
-*i.Note: lowercase characters affect a region until they're reverted. Uppercase characters do not need to be closed, as they do not affect a region.*R.
+*i.Note: lowercase characters affect a region until they're reverted. Other characters do not need to be closed, as they do not affect a region.*R.
 
 Character *|. Name        *|. Description           *|. Parameters
 **        *|. Markup Mode *|. Switch to Markup Mode *|. No
@@ -24,6 +24,7 @@ b         *|. Bold        *|. Applies bold style    *|. No
 s         *|. Size        *|. Changes the font size *|. Required (higher = bigger)
 i         *|. Italic      *|. Applies italic style  *|. No
 R         *|. Revert      *|. Reverts style(s)      *|. Optional - Revert all by default. If given, revert last X styles
+|         *|. Table       *|. Add table column      *|. No
 
 To parse a document, simply enter the directory *b.FoxUp*R. is in and run *i.python foxup.py <filename>*R.. *b.FoxUp*R. will return the parsed document in the directory the original document was in.
 
