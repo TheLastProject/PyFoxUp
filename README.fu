@@ -1,0 +1,31 @@
+title: FoxUp README
+lang: en
+---
+
+*s11.This file has been released into the public domain using the CC0 1.0 Universal license. If you're looking at an HTML document, please check README.fu for the source document.*R.
+
+*s20.Introducing FoxUp*R.
+*b.FoxUp*R. is a mode-based markup language, putting emphasis on a *i."define-and-reset"*R. markup style.
+
+*s20.Mode-based?*R.
+*b.FoxUp*R. supports both an *i.Input Mode*R. and a *i.Markup Mode*R..
+
+By default, *b.FoxUp*R. runs in *i.Input Mode*R.. In this mode, every character is interpreted as pure text input and not processed, with the exception of the special character (*i.***R.), used to switch to *i.Markup Mode*R.. To use this symbol as text in a document, simply enter it twice.
+
+To switch to *i.Markup Mode*R., simply type an *i.***R. character in your document when in *i.Input Mode*R.. In *i.Markup Mode*R., every key is interpreted as a command, making it easy to manage styles. For example, b activates *b.bold*R., i puts text into *i.italics*R. and bi applies *bi.both*R.. To switch back to *i.Input Mode*R., simply press *i..*R. (dot).
+
+*s20.Commands*R.
+*i.Note: lowercase characters affect a region until they're reverted. Uppercase characters do not need to be closed, as they do not affect a region.*R.
+
+Character *|. Name        *|. Description           *|. Parameters
+**        *|. Markup Mode *|. Switch to Markup Mode *|. No
+.         *|. Input Mode  *|. Switch to Input Mode  *|. No
+b         *|. Bold        *|. Applies bold style    *|. No
+s         *|. Size        *|. Changes the font size *|. Required (higher = bigger)
+i         *|. Italic      *|. Applies italic style  *|. No
+R         *|. Revert      *|. Reverts style(s)      *|. Optional - Revert all by default. If given, revert last X styles
+
+To parse a document, simply enter the directory *b.FoxUp*R. is in and run *i.python foxup.py <filename>*R.. *b.FoxUp*R. will return the parsed document in the directory the original document was in.
+
+*s20.License*R.
+*b.FoxUp*R. is released under the MIT license

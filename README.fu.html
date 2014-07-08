@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+          @page {
+            margin: 3cm 2cm; padding-left: 1.5cm;
+            @top-center {
+              content: "FoxUp README";
+              vertical-align: bottom; border-bottom: 0.5pt solid; margin-bottom: 0.5cm }
+            @bottom-right {
+              content: "Page " counter(page) " of " counter(pages) }}
+          body { text-align: justify }
+          h1 { -weasy-bookmark-level: none }
+          </style>
+</head>
+<body>
+<p>
+
+<span style='font-size:11px'>This file has been released into the public domain using the CC0 1.0 Universal license. If you&apos;re looking at an HTML document, please check README.fu for the source document.</span>
+<br />
+</p>
+<p>
+
+<span style='font-size:20px'>Introducing FoxUp</span>
+<br />
+
+<b>FoxUp</b> is a mode-based markup language, putting emphasis on a <em>&quot;define-and-reset&quot;</em> markup style.
+<br />
+</p>
+<p>
+
+<span style='font-size:20px'>Mode-based?</span>
+<br />
+
+<b>FoxUp</b> supports both an <em>Input Mode</em> and a <em>Markup Mode</em>.
+<br />
+</p>
+<p>
+
+By default, <b>FoxUp</b> runs in <em>Input Mode</em>. In this mode, every character is interpreted as pure text input and not processed, with the exception of the special character (<em>*</em>), used to switch to <em>Markup Mode</em>. To use this symbol as text in a document, simply enter it twice.
+<br />
+</p>
+<p>
+
+To switch to <em>Markup Mode</em>, simply type an <em>*</em> character in your document when in <em>Input Mode</em>. In <em>Markup Mode</em>, every key is interpreted as a command, making it easy to manage styles. For example, b activates <b>bold</b>, i puts text into <em>italics</em> and bi applies <b><em>both</b></em>. To switch back to <em>Input Mode</em>, simply press <em>.</em> (dot).
+<br />
+</p>
+<p>
+
+<span style='font-size:20px'>Commands</span>
+<br />
+
+<em>Note: lowercase characters affect a region until they&apos;re reverted. Uppercase characters do not need to be closed, as they do not affect a region.</em>
+<br />
+</p>
+<p>
+<table><tr><td>
+Character </td><td> Name        </td><td> Description           </td><td> Parameters
+</tr>
+<tr><td>
+*        </td><td> Markup Mode </td><td> Switch to Markup Mode </td><td> No
+</tr>
+<tr><td>
+.         </td><td> Input Mode  </td><td> Switch to Input Mode  </td><td> No
+</tr>
+<tr><td>
+b         </td><td> Bold        </td><td> Applies bold style    </td><td> No
+</tr>
+<tr><td>
+s         </td><td> Size        </td><td> Changes the font size </td><td> Required (higher = bigger)
+</tr>
+<tr><td>
+i         </td><td> Italic      </td><td> Applies italic style  </td><td> No
+</tr>
+<tr><td>
+R         </td><td> Revert      </td><td> Reverts style(s)      </td><td> Optional - Revert all by default. If given, revert last X styles
+</tr>
+</table>
+To parse a document, simply enter the directory <b>FoxUp</b> is in and run <em>python foxup.py &lt;filename&gt;</em>. <b>FoxUp</b> will return the parsed document in the directory the original document was in.
+<br />
+</p>
+<p>
+
+<span style='font-size:20px'>License</span>
+<br />
+
+<b>FoxUp</b> is released under the MIT license
+<br />
+</body>
+</html>
