@@ -218,6 +218,9 @@ def start(filename):
     undolist = []
     html = ["<p>"]
     css = ""
+    # Do not break if users don't set lang or title
+    lang = ""
+    title = ""
     with open(filename) as f:
         for line in f:
             if skipline: skipline = False; continue
