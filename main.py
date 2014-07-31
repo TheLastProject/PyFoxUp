@@ -130,12 +130,14 @@ def write_html(html, css, filename):
     output.write("<!DOCTYPE html>\n<html>\n<head>\n<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>" % (css, html))
     output.close()
 
-def end_document(html, css, filename):
+def end_document(html, css, filename, toreturn):
     html = "\n".join(html)
-    if output_format == "pdf":
+    if output_format == "pdf" and toreturn == "file":
         write_pdf(html, css, filename)
-    else:
+    elif toreturn == "file":
         write_html(html, css, filename)
+    else:
+        return "<!DOCTYPE html>\n<html>\n<head>\n<style>%s</style>\n</head>\n<body>\n%s\n</body>\n</html>" % (css, html)
 
 def get_setting(line):
     if not ":" in line: return None, None # This ends setup
@@ -210,8 +212,7 @@ def specials_after(line, specials):
 
     return "<br />", specials
 
-def start(filename):
-    skipline = False
+def convert(data, datatype="direct"):
     setup = True
     commandmode = False
     specials = []
@@ -221,37 +222,48 @@ def start(filename):
     # Do not break if users don't set lang or title
     lang = ""
     title = ""
-    with open(filename) as f:
-        for line in f:
-            if skipline: skipline = False; continue
-            line = escape(line.rstrip('\r\n'))
-            if setup:
-                setting, value = get_setting(line)
-                if setting == "lang":
-                    lang = value
-                elif setting == "title":
-                    title = value
-                elif not setting:
-                    css = generate_css(title, lang)
-                    setup = False
-                    skipline = True
-            elif not line:
-                if not "table" in specials:
-                    html.append("</p>\n<p>")
-            else:
-                # Take care of specials that are to be executed before the main parsing
-                addedhtml, specials = specials_before(line, specials)
-                html.append(addedhtml)
-        
-                # Main parsing
-                addedhtml, commandmode, undolist = convert_line(line, commandmode, undolist)
-                html.append(addedhtml)
+    if datatype == "file":
+        with open(data) as f:
+            for line in f:
+                setup, commandmode, specials, undolist, html, css, lang, title = convert_internal(line, setup, commandmode, specials, undolist, html, css, lang, title)
+    else:
+        lines = data.split("\n")
+        for line in lines:
+            setup, commandmode, specials, undolist, html, css, lang, title = convert_internal(line, setup, commandmode, specials, undolist, html, css, lang, title)
+   
+    endcode = end_document(html, css, data, datatype)
+    if datatype != "file":
+        return endcode
 
-                # Take care of specials that are to be executed before the main parsing
-                addedhtml, specials = specials_after(line, specials)
-                html.append(addedhtml)
+def convert_internal(line, setup, commandmode, specials, undolist, html, css, lang, title):
+    line = escape(line.rstrip('\r\n'))
+    if setup:
+        setting, value = get_setting(line)
+        if setting == "lang":
+            lang = value
+        elif setting == "title":
+            title = value
+        elif not setting:
+            css = generate_css(title, lang)
+            setup = False
+            setup, commandmode, specials, undolist, html, css, lang, title = convert_internal(line, setup, commandmode, specials, undolist, html, css, lang, title)
+    elif not line:
+        if not "table" in specials:
+            html.append("</p>\n<p>")
+    else:
+        # Take care of specials that are to be executed before the main parsing
+        addedhtml, specials = specials_before(line, specials)
+        html.append(addedhtml)
+     
+        # Main parsing
+        addedhtml, commandmode, undolist = convert_line(line, commandmode, undolist)
+        html.append(addedhtml)
 
-    end_document(html, css, filename)
+        # Take care of specials that are to be executed before the main parsing
+        addedhtml, specials = specials_after(line, specials)
+        html.append(addedhtml)
+
+    return setup, commandmode, specials, undolist, html, css, lang, title
 
 # Parse options
 args = argv[1:]
@@ -272,4 +284,4 @@ except ValueError:
 
 for arg in args:
     print("Parsing %s" % arg)
-    start(arg)
+    convert(arg, "file")
